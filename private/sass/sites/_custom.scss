@@ -75,3 +75,20 @@
 .col-linebreak {
     border-left: 1px dotted $gray-light;
 }
+
+// HELPERS/linklist
+.linklist {
+	margin: 0;
+	padding: 0;
+	li {
+		display: inline-block;
+	}
+	li + li:before {
+		content: "・";
+		vertical-align: -5%;
+		padding: 0 3px 0 0;
+	}
+	a {
+
+	}
+}

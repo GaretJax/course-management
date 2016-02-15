@@ -1,39 +1,93 @@
-// #############################################################################
-// FONTS
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.eot');
+    src: url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.woff') format('woff'),
+         url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.svg#open_sansregular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
 
-// there are two options to choose from when integrating fonts:
-// "OPTION 1": importing fonts from an external resource
-// "OPTION 2": hosting the files yourself
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans_regular_macroman/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/opensans_regular_macroman/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans_regular_macroman/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/opensans_regular_macroman/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/opensans_regular_macroman/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
 
-// OPTION 1
-// @import url("http://fonts.googleapis.com/css?family=Lobster");
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans_semibold_macroman/OpenSans-Semibold-webfont.eot');
+    src: url('../fonts/opensans_semibold_macroman/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans_semibold_macroman/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('../fonts/opensans_semibold_macroman/OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('../fonts/opensans_semibold_macroman/OpenSans-Semibold-webfont.svg#open_sansregular') format('svg');
+    font-weight: 600;
+    font-style: normal;
+}
 
-// OPTION 2
-// @font-face {
-//     font-family: "ClearSans";
-//     font-weight: 200;
-//     src: url("../fonts/clearsans/ClearSans-Light.eot?#iefix");
-//     src: url("../fonts/clearsans/ClearSans-Light.eot?#iefix") format("eot"),
-//          url("../fonts/clearsans/ClearSans-Light.woff") format("woff"),
-//          url("../fonts/clearsans/ClearSans-Light.ttf") format("truetype"),
-//          url("../fonts/clearsans/ClearSans-Light.svg#ClearSans-Light") format("svg");
-// }
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.eot');
+    src: url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.woff') format('woff'),
+         url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.svg#open_sansregular') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+// 3, 6, 7
+// light, semi-bold, bold
+
+
+///**
+// * http://applemusic.tumblr.com/
+// * https://jsfiddle.net/xq56dmrh/
+// */
 //
-// @font-face {
-//     font-family: "ClearSans";
-//     font-weight: 400;
-//     src: url("../fonts/clearsans/ClearSans-Regular.eot?#iefix");
-//     src: url("../fonts/clearsans/ClearSans-Regular.eot?#iefix") format("eot"),
-//          url("../fonts/clearsans/ClearSans-Regular.woff") format("woff"),
-//          url("../fonts/clearsans/ClearSans-Regular.ttf") format("truetype"),
-//          url("../fonts/clearsans/ClearSans-Regular.svg#ClearSans-Light") format("svg");
-// }
-// @font-face {
-//     font-family: "ClearSans";
-//     font-weight: 600;
-//     src: url("../fonts/clearsans/ClearSans-Medium.eot?#iefix");
-//     src: url("../fonts/clearsans/ClearSans-Medium.eot?#iefix") format("eot"),
-//          url("../fonts/clearsans/ClearSans-Medium.woff") format("woff"),
-//          url("../fonts/clearsans/ClearSans-Medium.ttf") format("truetype"),
-//          url("../fonts/clearsans/ClearSans-Medium.svg#ClearSans-Light") format("svg");
-// }
+///** Ultra Light */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 100;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
+//}
+//
+///** Thin */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 200;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
+//}
+//
+///** Regular */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 400;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+//}
+//
+///** Medium */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 500;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+//}
+//
+///** Semi Bold */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 600;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
+//}
+//
+///** Bold */
+//@font-face {
+//  font-family: "San Francisco";
+//  font-weight: 700;
+//  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+//}

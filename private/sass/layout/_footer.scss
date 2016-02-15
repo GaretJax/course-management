@@ -4,3 +4,17 @@
 // all styles related to the global footer should be declared within this file
 // apply the "sites/" nesting described within the documentation if the file is
 // getting to large
+
+body > .container-fluid > footer {
+    color: #999;
+    font-size: 11px;
+    line-height: 1.8em;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    text-shadow: #fff 0 1px 0;
+    p {
+        margin: 0;
+    }
+}

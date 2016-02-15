@@ -1,0 +1,51 @@
+{% extends "education/course_detail_base.html" %}
+
+{% load bootstrap3 %}
+
+{% block panel_content %}
+    <div class="panel-body">
+        {% if is_paginated %}
+            <nav>
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                        <li class="previous"><a href="?page={{ page_obj.prev_page_number }}"><span aria-hidden="true">&larr;</span> Older sessions</a></li>
+                    {% else %}
+                        <li class="previous disabled"><span><span aria-hidden="true">&larr;</span> Older sessions</span></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <li class="next"><a href="?page={{ page_obj.next_page_number }}">Newer sessions<span aria-hidden="true">&rarr;</span></a></li>
+                    {% else %}
+                        <li class="next disabled"><span>Newer sessions<span aria-hidden="true">&rarr;</span></span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                {% for session in session_list %}
+                    <th class="text-center">{{ session.start }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participant_list %}
+                <tr>
+                    <th scope="row">{{ participant.contact }}</th>
+                    {% for session in session_list %}
+                        <td class="text-center"><input type="checkbox"/></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="{% url "education:course:attendance" course_pk=course.pk %}">Update</a>
+        <form class="form-inline pull-right" method="get" action="">
+            Show &nbsp;{% bootstrap_form paginate_by_form layout='inline' %} sessions per page
+            <button class="btn btn-primary sr-only" type="submit">Go</button>
+        </form>
+    </div>
+{% endblock %}

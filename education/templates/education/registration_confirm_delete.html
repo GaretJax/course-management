@@ -1,0 +1,13 @@
+{% extends "education/course_detail_base.html" %}
+
+{% load bootstrap3 %}
+
+{% block panel_content %}
+    <div class="panel-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to remove "{{ object.contact }}" from "{{ object.course }}"?</p>
+            <button class="btn btn-danger" type="submit">Confirm</button>
+        </form>
+    </div>
+{% endblock %}

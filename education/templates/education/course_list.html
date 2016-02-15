@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>Courses</h2>
+        <div class="actions">
+            <a class="btn btn-default" href="{% url "education:course:add" %}">Add course</a>
+        </div>
+    </header>
+
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Period</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url "education:course:overview" course_pk=course.pk %}">{{ course.name }}</a>
+                            <span class="text-muted">&nbsp;— {{ course.identifier }}</span>
+                        </td>
+                        <td>{{ course.start }} – {{ course.end }}</td>
+                        <td>
+                            {% if course.confirmed %}
+                                Confirmed
+                            {% elif course.active %}
+                                Active
+                            {% else %}
+                                Draft
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="{% url "education:course:edit" course_pk=course.pk %}">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="{% url "education:course:delete" course_pk=course.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

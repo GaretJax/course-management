@@ -1,0 +1,25 @@
+{% extends "education/course_detail_base.html" %}
+
+{% block panel_content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reg in object_list.all %}
+                <tr>
+                    <td>{{ reg.contact }}</td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" href="{% url "education:course:participants:remove" course_pk=course.pk registration_pk=reg.pk %}">Remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="{% url "education:course:participants:add" course_pk=course.pk %}">Add participant</a>
+    </div>
+{% endblock %}

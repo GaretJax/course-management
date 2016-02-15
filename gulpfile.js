@@ -90,8 +90,14 @@ if (process.env.GULP_MODE !== 'production') {
 }
 
 gulp.task('watch', function () {
-    gulp.watch(PROJECT_PATTERNS.sass, ['sass']);
-    gulp.watch(PROJECT_PATTERNS.js, ['lint']);
+    gulp.watch(PROJECT_PATTERNS.sass, [{
+        usePolling: true,
+        interval: 1000
+    }, 'sass']);
+    gulp.watch(PROJECT_PATTERNS.js, [{
+        usePolling: true,
+        interval: 1000
+    }, 'lint']);
 });
 
 gulp.task('default', ['bower', 'sass', 'lint', 'watch']);
