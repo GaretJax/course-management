@@ -1,12 +1,11 @@
-import datetime
-
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.functional import cached_property
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 import menu as m
 
@@ -21,19 +20,19 @@ sidebar_menu.add_all([
 
 main_menu = m.Menu('Main menu')
 main_menu.add_all([
-    m.Item('Customers', 'education:index'),
+    # m.Item('Customers', 'education:index'),
     m.Item('Courses', 'education:course'),
-    m.Item('Collaborators', 'education:index'),
+    # m.Item('Collaborators', 'education:index'),
 ])
 
 
 course_menu = m.Menu('Course menu')
 
 
+@login_required
 def index(request):
     return render(request, 'education/index.html', {
         'main_menu': main_menu,
-        'sidebar_menu': sidebar_menu,
     })
 
 
@@ -59,10 +58,12 @@ class MenuMixin(UrlMixin):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class ListLocations(MenuMixin, ListView):
     model = models.Location
 
 
+@method_decorator(login_required, name='dispatch')
 class AddLocation(MenuMixin, CreateView):
     model = models.Location
     success_url = reverse_lazy('education:location')
@@ -71,6 +72,7 @@ class AddLocation(MenuMixin, CreateView):
     ]
 
 
+@method_decorator(login_required, name='dispatch')
 class EditLocation(MenuMixin, UpdateView):
     model = models.Location
     success_url = reverse_lazy('education:location')
@@ -79,15 +81,18 @@ class EditLocation(MenuMixin, UpdateView):
     ]
 
 
+@method_decorator(login_required, name='dispatch')
 class DeleteLocation(MenuMixin, DeleteView):
     model = models.Location
     success_url = reverse_lazy('education:location')
 
 
+@method_decorator(login_required, name='dispatch')
 class ListCourses(MenuMixin, ListView):
     model = models.Course
 
 
+@method_decorator(login_required, name='dispatch')
 class AddCourse(MenuMixin, CreateView):
     model = models.Course
     success_url = reverse_lazy('education:course')
@@ -117,24 +122,24 @@ class CourseObjectMixin(MenuMixin):
         return context
 
 
-class CourseManagementView(CourseObjectMixin, DetailView):
+@course_menu.item('Overview', 'education:course:overview')
+@method_decorator(login_required, name='dispatch')
+class CourseOverview(CourseObjectMixin, DetailView):
+    template_name = 'education/course_overview.html'
     model = models.Course
 
     def get_object(self):
         return self.course
 
 
-@course_menu.item('Overview', 'education:course:overview')
-class CourseOverview(CourseManagementView):
-    template_name = 'education/course_overview.html'
-
-
 @course_menu.item('Participants management', 'education:course:participants')
+@method_decorator(login_required, name='dispatch')
 class ParticipantsManagement(CourseObjectMixin, ListView):
     def get_queryset(self):
         return self.course.registrations
 
 
+@method_decorator(login_required, name='dispatch')
 class AddParticipant(CourseObjectMixin, CreateView):
     model = models.Registration
     form_class = forms.AddParticipantForm
@@ -152,6 +157,7 @@ class AddParticipant(CourseObjectMixin, CreateView):
         })
 
 
+@method_decorator(login_required, name='dispatch')
 class RemoveParticipant(CourseObjectMixin, DeleteView):
     model = models.Registration
     pk_url_kwarg = 'registration_pk'
@@ -163,11 +169,13 @@ class RemoveParticipant(CourseObjectMixin, DeleteView):
 
 
 @course_menu.item('Sessions planning', 'education:course:sessions')
+@method_decorator(login_required, name='dispatch')
 class SessionsPlanning(CourseObjectMixin, ListView):
     def get_queryset(self):
         return self.course.sessions
 
 
+@method_decorator(login_required, name='dispatch')
 class AddSession(CourseObjectMixin, CreateView):
     model = models.Session
     fields = [
@@ -189,6 +197,7 @@ class AddSession(CourseObjectMixin, CreateView):
         return super(AddSession, self).form_valid(form)
 
 
+@method_decorator(login_required, name='dispatch')
 class EditSession(CourseObjectMixin, UpdateView):
     model = models.Session
     pk_url_kwarg = 'session_pk'
@@ -204,6 +213,7 @@ class EditSession(CourseObjectMixin, UpdateView):
         })
 
 
+@method_decorator(login_required, name='dispatch')
 class DeleteSession(CourseObjectMixin, DeleteView):
     model = models.Session
     pk_url_kwarg = 'session_pk'
@@ -215,6 +225,7 @@ class DeleteSession(CourseObjectMixin, DeleteView):
 
 
 @course_menu.item('Attendance monitoring', 'education:course:attendance')
+@method_decorator(login_required, name='dispatch')
 class AttendanceMonitoring(CourseObjectMixin, ListView):
     template_name = 'education/course_attendance.html'
     model = models.Session
@@ -247,6 +258,7 @@ class AttendanceMonitoring(CourseObjectMixin, ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class EditCourse(MenuMixin, UpdateView):
     model = models.Course
     pk_url_kwarg = 'course_pk'
@@ -261,5 +273,6 @@ class EditCourse(MenuMixin, UpdateView):
     ]
 
 
+@method_decorator(login_required, name='dispatch')
 class DeleteCourse(CourseObjectMixin, DeleteView):
     success_url = reverse_lazy('education:course')

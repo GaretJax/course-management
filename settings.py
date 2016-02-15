@@ -1,5 +1,6 @@
 INSTALLED_APPS = []
-# TEMPLATE_CONTEXT_PROCESSORS = []
+TEMPLATES = []
+TEMPLATE_CONTEXT_PROCESSORS = []
 MIDDLEWARE_CLASSES = []
 
 INSTALLED_ADDONS = [
@@ -22,8 +23,15 @@ INSTALLED_APPS.extend([
     'menu',
     'education',
     'bootstrap3',
+    'django_gravatar',
 ])
 
-# TEMPLATE_CONTEXT_PROCESSORS.extend([])
+LOGIN_URL = 'login'
+
+TEMPLATES[0]['OPTIONS']['context_processors'].extend([
+    'education.context_processors.version',
+])
 
 MIDDLEWARE_CLASSES.extend([])
+
+del TEMPLATE_CONTEXT_PROCESSORS  # Deprecated in django 1.9

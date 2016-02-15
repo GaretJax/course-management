@@ -1,0 +1,17 @@
+{% extends "simple-panel.html" %}
+
+{% load bootstrap3 %}
+
+{% block panel_class %}login-panel{% endblock %}
+
+{% block panel_body %}
+    <form action="" method="post" class="form content">
+        {% csrf_token %}
+        <h1>Società Pallanuoto Bissone</h1>
+        {% bootstrap_form_errors form 'non_fields' %}
+        {% bootstrap_field form.username bound_css_class='is-bound' show_label=False %}
+        {% bootstrap_field form.password bound_css_class='is-bound' show_label=False %}
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a href="{% url "password_reset" %}" class="btn btn-link">Forgot password?</a>
+    </form>
+{% endblock %}

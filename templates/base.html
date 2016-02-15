@@ -1,14 +1,15 @@
 {% extends "base_root.html" %}
-{% load i18n staticfiles menu %}
 
-{% block body_class %}tpl-base{% endblock %}
+{% load i18n staticfiles menu gravatar %}
+
+{% block body_class %}left-sidebar{% endblock %}
 
 {% block extend_root %}
     {% block header %}
         <header class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
                 <!--h1 class="navbar-brand"-->
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="{% url "education:index" %}">
                         <span class="sr-only">{{ request.site.name }}</span>
                         <img src="{% static "images/logo/logo.color.icon.svg" %}" alt="{{ request.site.name }}" />
                     </a>
@@ -31,6 +32,18 @@
                     <ul class="nav navbar-nav navbar-left">
                         {% children main_menu %}
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {% gravatar user.email 50 %}
+                                {{ user.get_full_name|default:user.username }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url "password_change" %}">Change password</a></li>
+                                <li><a href="{% url "logout" %}">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 {% endblock navbar %}
             </div>
         </header>
@@ -39,9 +52,11 @@
     {% block sidebar_container %}
         <aside class="sidebar">
             {% block sidebar %}
-                <ul class="nav">
-                    {% children sidebar_menu %}
-                </ul>
+                {% if sidebar_menu %}
+                    <ul class="nav">
+                        {% children sidebar_menu %}
+                    </ul>
+                {% endif %}
             {% endblock %}
         </aside>
     {% endblock %}

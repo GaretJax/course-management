@@ -66,7 +66,7 @@ class ViewGroup(Group):
             ]
 
 
-urlpatterns = Group(None, '', [
+urlpatterns = Group('education', '', [
     url(r'^$', views.index, name='index'),
     views.ListLocations.as_url('location', 'locations', [
         views.AddLocation.as_url('add'),

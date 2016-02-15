@@ -1,0 +1,23 @@
+{% extends "base_root.html" %}
+
+{% load bootstrap3 %}
+
+{% block body_class %}simple-panel{% endblock %}
+
+{% block extend_root %}
+    <div class="panel panel-default {% block panel_class %}{% endblock %}">
+        <div class="panel-body">
+            {% block panel_body %}{% endblock %}
+        </div>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+        <ul class="linklist">
+            <li>STORM {{ version }} ({{ commit }})</li>
+            {#<li><a href="{{ url_for('docs_index') }}">Documentation</a></li>#}
+            {#<li><a href="{{ url_for('feedback', next=request.url) }}" class="overlay-form">Feedback</a></li>#}
+        </ul>
+        <p>Rendered in __EXECUTION_TIME__</p>
+        <p>Copyright &copy; {% now "Y" %} Jonathan Stoppani.</p>
+    </footer>
+{% endblock %}

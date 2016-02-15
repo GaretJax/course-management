@@ -1,5 +1,4 @@
 from django.template.loader import render_to_string
-from django.template import Context, RequestContext
 from django.core.urlresolvers import reverse
 
 
@@ -32,12 +31,9 @@ class Menu(object):
             yield item
 
     def render(self, request):
-        return render_to_string(
-            self.template,
-            context_instance=RequestContext(request, {
-                'menu': self,
-            }),
-        )
+        return render_to_string(self.template, request=request, context={
+            'menu': self,
+        })
 
 
 class RawItem(object):
@@ -56,15 +52,12 @@ class RawItem(object):
         return False
 
     def render(self, request, **kwargs):
-        return render_to_string(
-            self.template,
-            context_instance=RequestContext(request, {
-                'item': self,
-                'url': self.get_url(request, **kwargs),
-                'is_active': self.is_active(request),
-                'is_parent': self.is_parent(request),
-            }),
-        )
+        return render_to_string(self.template, request=request, context={
+            'item': self,
+            'url': self.get_url(request, **kwargs),
+            'is_active': self.is_active(request),
+            'is_parent': self.is_parent(request),
+        })
 
     def __repr__(self):
         return 'Item({!r})'.format(self._url)
@@ -97,9 +90,6 @@ class GroupedItems(object):
             yield item
 
     def render(self, request):
-        return render_to_string(
-            self.template,
-            context_instance=Context(request, {
-                'items': self,
-            }),
-        )
+        return render_to_string(self.template, request=request, context={
+            'items': self,
+        })
