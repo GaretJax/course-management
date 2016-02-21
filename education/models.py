@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.utils.functional import cached_property
 
 
 # TODO REFACTOR: The following models should be moved into their own module
@@ -78,6 +79,23 @@ class Session(models.Model):
     def actual_location(self):
         return self.location or self.course.location
 
+    @cached_property
+    def attendees_pks(self):
+        return frozenset(
+            self.attendees
+            .filter(attended=True)
+            .values_list('attendee', flat=True)
+        )
+
+    @cached_property
+    def coaches_pks(self):
+        return frozenset(
+            self.coaches
+            .filter(attended=True)
+            .values_list('attendee', flat=True)
+        )
+
+
 
 class CourseCoach(models.Model):
     course = models.ForeignKey(Course, related_name='coaches')
@@ -104,23 +122,27 @@ class Registration(models.Model):
         return '{} / {}'.format(self.course, self.contact)
 
 
-class SessionCoach(models.Model):
+class AttendanceBase(models.Model):
+    filled_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                  null=True, blank=True)
+    filled_at = models.DateTimeField(default=timezone.now)
+    attended = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+
+
+class SessionCoach(AttendanceBase):
     session = models.ForeignKey(Session, related_name='coaches')
-    coach = models.ForeignKey(CourseCoach)
-    filled_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  null=True, blank=True)
-    filled_at = models.DateTimeField(default=timezone.now)
+    attendee = models.ForeignKey(CourseCoach)
 
     class Meta:
-        unique_together = ('session', 'coach')
+        unique_together = ('session', 'attendee')
 
 
-class Attendance(models.Model):
+class Attendance(AttendanceBase):
     session = models.ForeignKey(Session, related_name='attendees')
-    registration = models.ForeignKey(Registration)
-    filled_by = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                  null=True, blank=True)
-    filled_at = models.DateTimeField(default=timezone.now)
+    attendee = models.ForeignKey(Registration)
 
     class Meta:
-        unique_together = ('session', 'registration')
+        unique_together = ('session', 'attendee')

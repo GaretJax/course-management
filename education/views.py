@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import ProcessFormView, FormMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.functional import cached_property
 from django.utils.decorators import method_decorator
@@ -9,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 import menu as m
 
-from . import models, forms
+from . import models, forms, utils
 
 
 sidebar_menu = m.Menu('Sidebar menu')
@@ -178,11 +179,7 @@ class SessionsPlanning(CourseObjectMixin, ListView):
 @method_decorator(login_required, name='dispatch')
 class AddSession(CourseObjectMixin, CreateView):
     model = models.Session
-    fields = [
-        'start',
-        'end',
-        'location',
-    ]
+    form_class = forms.SessionPlanningForm
 
     def get_success_url(self):
         return reverse('education:course:sessions', kwargs={
@@ -201,11 +198,7 @@ class AddSession(CourseObjectMixin, CreateView):
 class EditSession(CourseObjectMixin, UpdateView):
     model = models.Session
     pk_url_kwarg = 'session_pk'
-    fields = [
-        'start',
-        'end',
-        'location',
-    ]
+    form_class = forms.SessionPlanningForm
 
     def get_success_url(self):
         return reverse('education:course:sessions', kwargs={
@@ -226,11 +219,23 @@ class DeleteSession(CourseObjectMixin, DeleteView):
 
 @course_menu.item('Attendance monitoring', 'education:course:attendance')
 @method_decorator(login_required, name='dispatch')
-class AttendanceMonitoring(CourseObjectMixin, ListView):
+class AttendanceMonitoring(CourseObjectMixin, FormMixin,
+                           ProcessFormView, ListView):
     template_name = 'education/course_attendance.html'
     model = models.Session
     paginate_by = 5
     paginate_by_choices = [3, 5, 8, 10, 15]
+    form_class = forms.AttendanceForm
+
+    def get_form_kwargs(self):
+        kwargs = super(AttendanceMonitoring, self).get_form_kwargs()
+        kwargs.update({
+            'course': self.course,
+        })
+        return kwargs
+
+    def get(self, *args, **kwargs):
+        return super(ProcessFormView, self).get(*args, **kwargs)
 
     def get_queryset(self):
         return self.course.sessions.all()
@@ -254,8 +259,24 @@ class AttendanceMonitoring(CourseObjectMixin, ListView):
                 initial={'paginate_by': self.get_paginate_by()},
             ),
             'participant_list': self.course.registrations.all(),
+            'coach_list': self.course.coaches.all(),
         })
         return context
+
+    def get_success_url(self):
+        return utils.preserve_request_params(
+            self.request,
+            reverse('education:course:attendance', kwargs={
+                'course_pk': self.course.pk,
+            }),
+        )
+
+    def form_invalid(self, form):
+        return self.get(self.request, *self.args, **self.kwargs)
+
+    def form_valid(self, form):
+        form.save(self.request.user)
+        return super(AttendanceMonitoring, self).form_valid(form)
 
 
 @method_decorator(login_required, name='dispatch')

@@ -7,7 +7,7 @@
 {% block panel_body %}
     <form action="" method="post" class="form content">
         {% csrf_token %}
-        <h1>Società Pallanuoto Bissone</h1>
+        <h1>{{ site.name }}</h1>
         {% bootstrap_form_errors form 'non_fields' %}
         {% bootstrap_field form.username bound_css_class='is-bound' show_label=False %}
         {% bootstrap_field form.password bound_css_class='is-bound' show_label=False %}

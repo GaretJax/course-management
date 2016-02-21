@@ -172,7 +172,7 @@ class SessionAdmin(admin.ModelAdmin):
 
     def attendees_count(self, obj):
         return '{}/{}'.format(
-            obj.attendees.count(),
+            obj.attendees.filter(attended=True).count(),
             obj.course.registrations.count(),
         )
     attendees_count.short_description = 'attendees'

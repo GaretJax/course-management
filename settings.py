@@ -16,6 +16,13 @@ INSTALLED_ADDONS = [
 import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
 
+USE_L10N = False
+LANGUAGE_CODE = 'it_CH'
+
+DATETIME_INPUT_FORMATS = [
+    '%d/%m/%Y %H:%M',
+]
+
 # all django settings can be altered here
 
 # INSTALLED_APPS.insert(0, 'suit')

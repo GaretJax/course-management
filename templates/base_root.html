@@ -1,5 +1,5 @@
 <!doctype html>{% load i18n staticfiles %}
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" data-locale="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
     <!--[if IE]><link rel="shortcut icon" href="{% static 'favicon.ico' %}"><![endif]-->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" />
     {#% render_block "css" %#}
     <!--[if lt IE 9]>
     <script src="{% static 'js/libs/html5shiv.min.js' %}"></script>
@@ -27,11 +28,14 @@
 <body id="page-top" class="noscript lang-{{ LANGUAGE_CODE }} {% block body_class %}tpl-root{% endblock %}">
     {% block extend_root %}{% endblock %}
     <script src="{% static 'js/libs/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/moment/min/moment-with-locales.min.js' %}"></script>
     <script src="{% static 'js/libs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script src="{% static 'js/libs/class.min.js' %}"></script>
     <script src="{% static 'js/libs/outdatedBrowser.min.js' %}"></script>
     <script src="{% static 'js/addons/cl.utils.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
+
     {#% render_block "js" %#}
     {% block extrafoot %}{% endblock %}
     {{ ALDRYN_SNAKE.render_tail }}

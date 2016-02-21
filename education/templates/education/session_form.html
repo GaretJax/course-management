@@ -7,7 +7,12 @@
         <h3>{% if object %}Edit session{% else %}Add session{% endif %}</h3>
         <form action="" method="post" class="form">
             {% csrf_token %}
-            {% bootstrap_form form %}
+
+            <div class="row">
+                {% bootstrap_field form.start addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datetimepicker' %}
+                {% bootstrap_field form.end addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datetimepicker' %}
+            </div>
+            {% bootstrap_field form.location %}
             <button class="btn btn-primary" type="submit">{% if object %}Save{% else %}Create{% endif %}</button>
         </form>
     </div>
