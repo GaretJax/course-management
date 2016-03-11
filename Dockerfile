@@ -1,5 +1,5 @@
 # <DOCKER_FROM>  # Warning: text inside the DOCKER_FROM tags is auto-generated. Manual changes will be overwritten.
-FROM aldryn/base-project:3.0.4
+FROM aldryn/base-project:3.1.0
 # </DOCKER_FROM>
 
 # Generate locales
@@ -25,7 +25,7 @@ RUN bower install --verbose --allow-root --config.interactive=false
 
 # python requirements
 # -------------------
-RUN mkdir -p ~/.pip && printf "[global]\nindex-url = https://wheels.aldryn.net/d/pypi/aldryn-baseproject/\nfind-links=\n    file:///root/.cache/pip-tools/wheels\n    file:///root/.cache/pip-tools/pkgs\n    file:///wheels\nextra-index-url=\n    https://devpi.divio.ch/aldryn/extras/+simple/\nretries = 11\n" > ~/.pip/pip.conf
+RUN mkdir -p ~/.pip && printf "[global]\nindex-url = https://wheels.aldryn.net/d/pypi/aldryn-baseproject/\nfind-links=\n    file:///root/.cache/pip-tools/wheels\n    file:///root/.cache/pip-tools/pkgs\nextra-index-url=\n    https://devpi.divio.ch/aldryn/extras/+simple/\nretries = 11\n" > ~/.pip/pip.conf
 COPY requirements.in /app/
 COPY addons-dev /app/addons-dev/
 RUN pip-compile -v && pip install --no-deps -r requirements.txt && rm -rf /root/.cache
