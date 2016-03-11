@@ -1,0 +1,38 @@
+.table.table-attendances {
+    border-top: 0 !important;
+    table-layout: fixed;
+
+    > thead > tr:first-child {
+        > th:first-child {
+            border-top: 0;
+        }
+        > td, > th {
+            border-top: 1px solid $table-border-color;
+        }
+    }
+
+    tr.section-title > th,
+    tr.section-title > td {
+        padding-top: 20px;
+        background: #fff;
+
+        border-left-style: dashed;
+        border-right-style: dashed;
+        //border-right: 0;
+    }
+
+    th.coach, th.participant {
+        font-weight: normal;
+    }
+
+    td.coach-attendance,
+    td.participant-attendance {
+        cursor: pointer;
+    }
+
+    > thead > tr:first-child > th:first-child {
+        min-width: 250px;
+        width: 250px;
+        max-width: 250px;
+    }
+}

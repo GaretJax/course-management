@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>{% if object %}Edit course{% else %}Add course{% endif %}</h2>
+    </header>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% if object %}
+                    <p class="text-muted">{{ object.identifier }}</p>
+                {% else %}
+                    {% bootstrap_field form.identifier %}
+                {% endif %}
+
+                {% bootstrap_field form.name %}
+                <div class="row">
+                    {% bootstrap_field form.start addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datepicker' %}
+                    {% bootstrap_field form.end addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datepicker' %}
+                </div>
+                {% bootstrap_field form.location %}
+                {% if object %}
+                    <div class="row">
+                        {% bootstrap_field form.active form_group_class='form-group col-md-12' %}
+                        {% bootstrap_field form.confirmed form_group_class='form-group col-md-12' %}
+                    </div>
+                {% endif %}
+
+                <button class="btn btn-primary" type="submit">{% if object %}Save{% else %}Create{% endif %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% load menu %}
+
+<li class="divider">---</li>
+{% if group.label %}<li role="presentation" class="dropdown-header">{{ group.label }}</li>{% endif %}
+{% for item in group %}
+    {% menu item %}
+{% endfor %}
+<li class="divider">---</li>

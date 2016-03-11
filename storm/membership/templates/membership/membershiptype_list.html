@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>Membership structure</h2>
+        <div class="actions">
+            <a class="btn btn-default" href="{% url "membership:types:add" %}" rel="modal">Add membership type</a>
+        </div>
+    </header>
+
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type in object_list %}
+                    <tr>
+                        <td>{{ type.name }}</td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="{% url "membership:types:edit" pk=type.pk %}" rel="modal">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="{% url "membership:types:delete" pk=type.pk %}" rel="modal">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

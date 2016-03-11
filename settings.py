@@ -8,7 +8,7 @@ INSTALLED_ADDONS = [
     'aldryn-addons',
     'aldryn-django',
     'aldryn-sso',
-    # 'aldryn-django-cms',
+    #'aldryn-django-cms',
     'aldryn-devsync',
     # </INSTALLED_ADDONS>
 ]
@@ -17,26 +17,36 @@ import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
 
 USE_L10N = False
-LANGUAGE_CODE = 'it_CH'
+LANGUAGE_CODE = 'it'
 
 DATETIME_INPUT_FORMATS = [
     '%d/%m/%Y %H:%M',
+]
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y',
 ]
 
 # all django settings can be altered here
 
 # INSTALLED_APPS.insert(0, 'suit')
 INSTALLED_APPS.extend([
-    'menu',
-    'education',
+    'storm.menu',
+    'storm.membership.apps.ContactConfig',
+    'storm.education.apps.EducationConfig',
     'bootstrap3',
     'django_gravatar',
 ])
 
+ROOT_URLCONF = 'storm.urls'
+
+WSGI_APPLICATION = 'storm.wsgi.application'
+
 LOGIN_URL = 'login'
 
 TEMPLATES[0]['OPTIONS']['context_processors'].extend([
-    'education.context_processors.version',
+    'storm.context_processors.version',
+    'storm.menu.context_processors.main_menu',
+    'storm.menu.context_processors.sidebar_menu',
 ])
 
 MIDDLEWARE_CLASSES.extend([])

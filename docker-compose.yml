@@ -12,5 +12,7 @@ web:
 
 db:
  image: postgres:9.4
+ environment:
+  POSTGRES_DB: db
  volumes:
   - ".:/app:rw"

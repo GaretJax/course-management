@@ -1,0 +1,28 @@
+{% extends "membership/membershipperiod_detail_base.html" %}
+
+{% block panel_content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type in object_list.all %}
+                <tr>
+                    <td>{{ type.type }}</td>
+                    <td>{{ type.price }}</td>
+                    <td>
+                        <a class="btn btn-default btn-xs" href="{% url "membership:periods:structure:edit" period_pk=period.pk type_pk=type.pk %}" rel="modal">Edit</a>
+                        <a class="btn btn-danger btn-xs" href="{% url "membership:periods:structure:delete" period_pk=period.pk type_pk=type.pk %}" rel="modal">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="{% url "membership:periods:structure:add" period_pk=period.pk %}" rel="modal">Add type</a>
+    </div>
+{% endblock %}

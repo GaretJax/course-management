@@ -1,4 +1,4 @@
-{% extends "base_root.html" %}
+{% extends base_template|default:"base_root.html" %}
 
 {% load i18n staticfiles menu gravatar %}
 
@@ -9,7 +9,7 @@
         <header class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-header">
                 <!--h1 class="navbar-brand"-->
-                    <a class="navbar-brand" href="{% url "education:index" %}">
+                    <a class="navbar-brand" href="{% url "education" %}">
                         <span class="sr-only">{{ request.site.name }}</span>
                         <img src="{% static "images/logo/logo.color.icon.svg" %}" alt="{{ request.site.name }}" />
                     </a>

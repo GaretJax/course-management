@@ -64,14 +64,75 @@ var Cl = window.Cl || {};
                 next: 'fa fa-chevron-right',
                 today: 'fa fa-bullseye',
                 clear: 'fa fa-trash-o',
-                close: 'fa fa-remove'
+                close: 'fa fa-remove',
             },
             locale: moment.locale('it'),
             calendarWeeks: true,
-            showClose: true,
+            showClose: false,
             //showTodayButton: true,
             allowInputToggle: true,
         });
-    });
+        $('.datepicker').datetimepicker({
+            icons: {
+                time: 'fa fa-clock-o',
+                date: 'fa fa-calendar',
+                up: 'fa fa-chevron-up',
+                down: 'fa fa-chevron-down',
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-bullseye',
+                clear: 'fa fa-trash-o',
+                close: 'fa fa-remove',
+            },
+            format: 'DD/MM/YYYY',
+            locale: moment.locale('it'),
+            calendarWeeks: true,
+            showClose: false,
+            //showTodayButton: true,
+            allowInputToggle: true,
+        });
 
+        // modal windows
+        var modalSubmit = function (form) {
+            var data = form.serialize();
+            var url = form.attr('action');
+            $.ajax(url, {
+                type: form.attr('method'),
+                data: data,
+                success: function (data, status, jqxhr) {
+                    if (data['status_code'] == 200) {
+                        form.closest('.modal').empty().append(
+                            prepareModal(url, $(data['content'])).find('.modal-dialog')
+                        );
+                    } else if (data['status_code'] == 302) {
+                        window.location = data['location'];
+                    }
+                },
+            });
+        }
+
+        var prepareModal = function (url, modal) {
+            modal.find('form[action=""]').attr('action', url);
+            modal.find('form button[type=submit], form input[type=submit]').click(function (e) {
+                modalSubmit($(this).closest('form'))
+                return false;
+            });
+            return modal;
+        }
+
+        $('a[rel=modal]').click(function (e) {
+            if (e.metaKey) {
+                return;
+            }
+
+            var url = $(this).attr('href');
+            $.ajax(url, {
+                success: function (data, status, jqxhr) {
+                    prepareModal(url, $(data['content'])).modal();
+                }
+            });
+
+            return false;
+        });
+    });
 })(jQuery);

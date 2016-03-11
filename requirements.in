@@ -13,3 +13,4 @@ django-classy-tags
 django-bootstrap3
 python-dateutil
 django-gravatar2
+django-cities

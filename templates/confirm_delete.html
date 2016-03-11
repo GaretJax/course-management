@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>{{ object }}</h2>
+    </header>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <button class="btn btn-danger" type="submit">Confirm</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

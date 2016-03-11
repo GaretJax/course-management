@@ -6,3 +6,5 @@
 /node_modules
 /.env-local
 .aldryn
+data.tar.gz
+static/vendor

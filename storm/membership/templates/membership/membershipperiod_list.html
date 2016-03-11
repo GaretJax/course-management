@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>Membership periods</h2>
+        <div class="actions">
+            <a class="btn btn-default" href="{% url "membership:periods:add" %}" rel="modal">Add period</a>
+        </div>
+    </header>
+
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Period</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for period in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url "membership:periods:overview" period_pk=period.pk %}">{{ period.name }}</a></td>
+                        <td>{{ period.start }} – {{ period.end }}</td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="{% url "membership:periods:edit" period_pk=period.pk %}" rel="modal">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="{% url "membership:periods:delete" period_pk=period.pk %}" rel="modal">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

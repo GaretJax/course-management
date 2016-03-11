@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load menu %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>{{ period.name }}</h2>
+        <div class="actions">
+            {% block header_actions %}{% endblock %}
+        </div>
+    </header>
+
+    <div class="panel with-nav-tabs panel-default">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs">
+                {% children submenu with period_pk=period.pk %}
+            </ul>
+        </div>
+        {% block panel_content %}
+            <div class="panel-body"></div>
+        {% endblock %}
+    </div>
+{% endblock %}

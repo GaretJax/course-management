@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="default-header">
+        <h2>Locations</h2>
+        <div class="actions">
+            <a class="btn btn-default" href="{% url "education:locations:add" %}">Add location</a>
+        </div>
+    </header>
+
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for location in object_list %}
+                    <tr>
+                        <td>{{ location.name }}</td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="{% url "education:locations:edit" pk=location.pk %}">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="{% url "education:locations:delete" pk=location.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

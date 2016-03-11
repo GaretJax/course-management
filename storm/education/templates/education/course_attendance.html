@@ -1,0 +1,106 @@
+{% extends "education/course_detail_base.html" %}
+
+{% load bootstrap3 url_manipulation itertools %}
+
+{% block panel_content %}
+    <div class="panel-body">
+        {% if is_paginated %}
+            <nav>
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                        <li class="previous"><a href="{% alter_url params page=page_obj.previous_page_number %}"><span aria-hidden="true">&larr;</span> Older sessions</a></li>
+                    {% else %}
+                        <li class="previous disabled"><span><span aria-hidden="true">&larr;</span> Older sessions</span></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <li class="next"><a href="{% alter_url params page=page_obj.next_page_number %}">Newer sessions<span aria-hidden="true">&rarr;</span></a></li>
+                    {% else %}
+                        <li class="next disabled"><span>Newer sessions<span aria-hidden="true">&rarr;</span></span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+    <form method="post" action="" id="attendance-form">
+        {% csrf_token %}
+        <table class="table table-bordered table-hover table-attendances">
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for session in session_list %}
+                        <th class="text-center session">
+                            {{ session.start }}
+                            <input type="hidden" name="sessions" value="{{ session.pk }}" />
+                        </th>
+                    {% endfor %}
+                    {% for i in page_obj|missing_objects_count|range %}
+                        <th></th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <th scope="col">Coaches</th>
+                    {% for session in session_list %}
+                        <td class="text-center toggle-checkbox coachs-attendance">
+                            <input type="checkbox" class="hidden"/>
+                        </td>
+                    {% endfor %}
+                    {% for i in page_obj|missing_objects_count|range %}
+                        <td></td>
+                    {% endfor %}
+                </tr>
+                {% for coach in coach_list %}
+                    <tr>
+                        <th scope="row" class="nowrap coach">{{ coach.contact }}</th>
+                        {% for session in session_list %}
+                            <td class="text-center toggle-checkbox coach-attendance">
+                                <input type="checkbox"
+                                       name="coaches_{{ session.pk }}"
+                                       value="{{ coach.pk }}"
+                                       {% if coach.pk in session.coaches_pks %}checked="checked"{% endif %} />
+                            </td>
+                        {% endfor %}
+                        {% for i in page_obj|missing_objects_count|range %}
+                            <td></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                <tr class="section-title">
+                    <th scope="col">Participants</th>
+                    {% for session in session_list %}
+                        <td class="text-center toggle-checkbox participant-attendance">
+                            <input type="checkbox" class="hidden" />
+                        </td>
+                    {% endfor %}
+                    {% for i in page_obj|missing_objects_count|range %}
+                        <td></td>
+                    {% endfor %}
+                </tr>
+                {% for participant in participant_list %}
+                    <tr>
+                        <th scope="row" class="nowrap participant">{{ participant.contact }}</th>
+                        {% for session in session_list %}
+                            <td class="text-center toggle-checkbox participant-attendance">
+                                <input type="checkbox"
+                                       name="attendees_{{ session.pk }}"
+                                       value="{{ participant.pk }}"
+                                       {% if participant.pk in session.attendees_pks %}checked="checked"{% endif %} />
+                            </td>
+                        {% endfor %}
+                        {% for i in page_obj|missing_objects_count|range %}
+                            <td></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <div class="panel-footer">
+        <a class="btn btn-default btn-submit" rel="attendance-form">Update</a>
+        <form class="form-inline pull-right" method="get" action="{% alter_url remove 'page' paginate_by_form.paginate_by.name  %}">
+            Show &nbsp;{% bootstrap_field paginate_by_form.paginate_by field_class='autosubmit' layout='inline' %} sessions per page
+            <button class="btn btn-primary sr-only" type="submit">Go</button>
+        </form>
+    </div>
+{% endblock %}

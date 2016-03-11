@@ -25,6 +25,11 @@
     .navbar-collapse > .navbar-right {
         margin-right: 15px;
 
+        > li:last-child > .dropdown-menu {
+            left: 0;
+            right: -1px;
+        }
+
         .gravatar {
             margin: -25px 10px -25px 0;
             border-radius: 100px;
