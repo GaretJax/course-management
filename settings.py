@@ -32,12 +32,14 @@ DATE_INPUT_FORMATS = [
 # INSTALLED_APPS.insert(0, 'suit')
 INSTALLED_APPS.extend([
     'django.contrib.gis',
-    'storm.menu',
-    'storm.membership.apps.ContactConfig',
-    'storm.education.apps.EducationConfig',
+
     'bootstrap3',
     'django_gravatar',
     'cities',
+
+    'storm.menu',
+    'storm.membership.apps.ContactConfig',
+    'storm.education.apps.EducationConfig',
 ])
 
 ROOT_URLCONF = 'storm.urls'
@@ -51,7 +53,9 @@ TEMPLATES[0]['OPTIONS']['context_processors'].extend([
     'storm.menu.context_processors.main_menu',
     'storm.menu.context_processors.sidebar_menu',
 ])
-
+TEMPLATES[0]['OPTIONS'].setdefault('builtins', []).extend([
+    'django.templatetags.i18n',
+])
 MIDDLEWARE_CLASSES.extend([])
 
 del TEMPLATE_CONTEXT_PROCESSORS  # Deprecated in django 1.9
