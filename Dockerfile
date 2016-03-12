@@ -4,7 +4,7 @@ FROM aldryn/base-project:3.1.0
 
 # Generate locales
 COPY ./locales /etc/locale.gen
-RUN apt-get update && apt-get install locales && locale-gen && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y locales libproj-dev gdal-bin && locale-gen && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # <DOCKER_BUILD>  # Warning: text inside the DOCKER_BUILD tags is auto-generated. Manual changes will be overwritten.
 

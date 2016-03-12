@@ -48,8 +48,14 @@ class MembershipPeriod(models.Model):
 
 
 class PeriodType(models.Model):
-    period = models.ForeignKey(MembershipPeriod, related_name='membership_types')
-    type = models.ForeignKey(MembershipType)
+    period = models.ForeignKey(
+        MembershipPeriod,
+        related_name='membership_types',
+    )
+    type = models.ForeignKey(
+        MembershipType,
+        related_name='membership_periods',
+    )
     price = models.DecimalField(decimal_places=2, max_digits=7)
 
     class Meta:
@@ -63,7 +69,7 @@ class PeriodType(models.Model):
 
 class Membership(models.Model):
     contact = models.ForeignKey(Contact)
-    membership = models.ForeignKey(PeriodType)
+    membership = models.ForeignKey(PeriodType, related_name='memberships')
 
     start = models.DateField(null=True, blank=True)
     end = models.DateField(null=True, blank=True)

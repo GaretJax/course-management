@@ -2,6 +2,7 @@ INSTALLED_APPS = []
 TEMPLATES = []
 TEMPLATE_CONTEXT_PROCESSORS = []
 MIDDLEWARE_CLASSES = []
+DATABASES = {}
 
 INSTALLED_ADDONS = [
     # <INSTALLED_ADDONS DISABLED>  # Warning: text inside the INSTALLED_ADDONS tags is auto-generated. Manual changes will be overwritten.
@@ -30,11 +31,13 @@ DATE_INPUT_FORMATS = [
 
 # INSTALLED_APPS.insert(0, 'suit')
 INSTALLED_APPS.extend([
+    'django.contrib.gis',
     'storm.menu',
     'storm.membership.apps.ContactConfig',
     'storm.education.apps.EducationConfig',
     'bootstrap3',
     'django_gravatar',
+    'cities',
 ])
 
 ROOT_URLCONF = 'storm.urls'
@@ -52,3 +55,16 @@ TEMPLATES[0]['OPTIONS']['context_processors'].extend([
 MIDDLEWARE_CLASSES.extend([])
 
 del TEMPLATE_CONTEXT_PROCESSORS  # Deprecated in django 1.9
+
+
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+# django-cities config
+CITIES_LOCALES = ['und', 'LANGUAGES']
+CITIES_POSTAL_CODES = ['CH', 'IT', 'DE', 'FR']
+CITIES_IGNORE_EMPTY_REGIONS = True
+CITIES_FILES = {
+    'city': {
+       'filenames': ['CH.zip', 'IT.zip', 'DE.zip', 'FR.zip'],
+    },
+}

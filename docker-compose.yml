@@ -11,7 +11,7 @@ web:
  env_file: .env-local
 
 db:
- image: postgres:9.4
+ image: mdillon/postgis:9.4
  environment:
   POSTGRES_DB: db
  volumes:

@@ -28,6 +28,9 @@ urlpatterns = views.Index.as_url('membership', '', [
                     views.DeletePeriodType.as_url('delete'),
                 ]),
             ]),
+            views.MembershipPeriodMembers.as_url('members', children=[
+
+            ]),
             views.EditMembershipPeriod.as_url('edit'),
             views.DeleteMembershipPeriod.as_url('delete'),
         ]),

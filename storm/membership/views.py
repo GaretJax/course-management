@@ -12,7 +12,7 @@ import storm.menu as m
 from storm.views import AjaxMixin
 from storm.menu.views import UrlMixin
 
-from . import models
+from . import models, forms
 
 
 period_menu = m.Menu('Period menu')
@@ -138,25 +138,31 @@ class MembershipPeriodStructure(MembershipPeriodObjectMixin, ListView):
         return self.period.membership_types
 
 
+@period_menu.item('Members', 'membership:periods:members')
+@method_decorator(login_required, name='dispatch')
+class MembershipPeriodMembers(MembershipPeriodObjectMixin, ListView):
+    template_name = 'membership/membershipperiod_members.html'
+
+    def get_queryset(self):
+        return models.Membership.objects.filter(membership__period=self.period)
+
+
 @method_decorator(login_required, name='dispatch')
 class AddTypeToPeriod(MembershipPeriodObjectMixin, AjaxMixin, CreateView):
     model = models.PeriodType
-    fields = [
-        'type',
-        'price',
-    ]
+    form_class = forms.AddTypeToPeriodForm
 
     def get_success_url(self):
         return reverse('membership:periods:structure', kwargs={
             'period_pk': self.period.pk,
         })
 
-    def form_valid(self, form):
-        """
-        If the form is valid, save the associated model.
-        """
-        form.instance.period = self.period
-        return super(AddTypeToPeriod, self).form_valid(form)
+    def get_form_kwargs(self):
+        kwargs = super(AddTypeToPeriod, self).get_form_kwargs()
+        kwargs.update({
+            'period': self.period,
+        })
+        return kwargs
 
 
 @method_decorator(login_required, name='dispatch')

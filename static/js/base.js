@@ -53,44 +53,48 @@ var Cl = window.Cl || {};
             e.stopPropagation();
         });
 
-        // date/time pickers
-        $('.datetimepicker').datetimepicker({
-            icons: {
-                time: 'fa fa-clock-o',
-                date: 'fa fa-calendar',
-                up: 'fa fa-chevron-up',
-                down: 'fa fa-chevron-down',
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-bullseye',
-                clear: 'fa fa-trash-o',
-                close: 'fa fa-remove',
-            },
-            locale: moment.locale('it'),
-            calendarWeeks: true,
-            showClose: false,
-            //showTodayButton: true,
-            allowInputToggle: true,
-        });
-        $('.datepicker').datetimepicker({
-            icons: {
-                time: 'fa fa-clock-o',
-                date: 'fa fa-calendar',
-                up: 'fa fa-chevron-up',
-                down: 'fa fa-chevron-down',
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-bullseye',
-                clear: 'fa fa-trash-o',
-                close: 'fa fa-remove',
-            },
-            format: 'DD/MM/YYYY',
-            locale: moment.locale('it'),
-            calendarWeeks: true,
-            showClose: false,
-            //showTodayButton: true,
-            allowInputToggle: true,
-        });
+        var initFormElements = function(scope) {
+            // date/time pickers
+            $('.datetimepicker', scope).datetimepicker({
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-bullseye',
+                    clear: 'fa fa-trash-o',
+                    close: 'fa fa-remove',
+                },
+                locale: moment.locale('it'),
+                calendarWeeks: true,
+                showClose: false,
+                //showTodayButton: true,
+                allowInputToggle: true,
+            });
+            $('.datepicker', scope).datetimepicker({
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-bullseye',
+                    clear: 'fa fa-trash-o',
+                    close: 'fa fa-remove',
+                },
+                format: 'DD/MM/YYYY',
+                locale: moment.locale('it'),
+                calendarWeeks: true,
+                showClose: false,
+                //showTodayButton: true,
+                allowInputToggle: true,
+            });
+        };
+
+        initFormElements($('body'));
 
         // modal windows
         var modalSubmit = function (form) {
@@ -117,6 +121,7 @@ var Cl = window.Cl || {};
                 modalSubmit($(this).closest('form'))
                 return false;
             });
+            initFormElements(modal);
             return modal;
         }
 
