@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -29,29 +30,24 @@ class ListContacts(UrlMixin, ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class AddContact(UrlMixin, CreateView):
+class AddContact(UrlMixin, AjaxMixin, CreateView):
     model = models.Contact
     success_url = reverse_lazy('membership:contacts')
-    fields = [
-        'first_name',
-        'last_name',
-    ]
+    form_class = forms.ContactForm
 
 
 @method_decorator(login_required, name='dispatch')
-class EditContact(UrlMixin, UpdateView):
+class EditContact(UrlMixin, AjaxMixin, UpdateView):
     model = models.Contact
     success_url = reverse_lazy('membership:contacts')
-    fields = [
-        'first_name',
-        'last_name',
-    ]
+    form_class = forms.ContactForm
 
 
 @method_decorator(login_required, name='dispatch')
-class DeleteContact(UrlMixin, DeleteView):
+class DeleteContact(UrlMixin, AjaxMixin, DeleteView):
     model = models.Contact
     success_url = reverse_lazy('membership:contacts')
+    template_name = 'confirm_delete.html'
 
 
 @method_decorator(login_required, name='dispatch')
@@ -120,7 +116,7 @@ class MembershipPeriodObjectMixin(UrlMixin):
         return context
 
 
-@period_menu.item('Overview', 'membership:periods:overview')
+@period_menu.item(_('Overview'), 'membership:periods:overview')
 @method_decorator(login_required, name='dispatch')
 class MembershipPeriodOverview(MembershipPeriodObjectMixin, DetailView):
     template_name = 'membership/membershipperiod_overview.html'
@@ -129,7 +125,7 @@ class MembershipPeriodOverview(MembershipPeriodObjectMixin, DetailView):
         return self.period
 
 
-@period_menu.item('Structure', 'membership:periods:structure')
+@period_menu.item(_('Structure'), 'membership:periods:structure')
 @method_decorator(login_required, name='dispatch')
 class MembershipPeriodStructure(MembershipPeriodObjectMixin, ListView):
     template_name = 'membership/membershipperiod_structure.html'
@@ -138,7 +134,7 @@ class MembershipPeriodStructure(MembershipPeriodObjectMixin, ListView):
         return self.period.membership_types
 
 
-@period_menu.item('Members', 'membership:periods:members')
+@period_menu.item(_('Members'), 'membership:periods:members')
 @method_decorator(login_required, name='dispatch')
 class MembershipPeriodMembers(MembershipPeriodObjectMixin, ListView):
     template_name = 'membership/membershipperiod_members.html'

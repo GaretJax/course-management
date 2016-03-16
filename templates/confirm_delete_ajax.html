@@ -1,11 +1,13 @@
 {% extends "modal_form.html" %}
 
-{% block modal_title %}Deleting "{{ object }}"{% endblock %}
+{% block modal_title %}
+    {% blocktrans with object=object %}Deleting "{{ object }}"{% endblocktrans %}
+{% endblock %}
 
 {% block modal_body %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>{% blocktrans with object=object %}Are you sure you want to delete "{{ object }}"?{% endblocktrans %}</p>
 {% endblock %}
 
 {% block modal_footer %}
-    <button class="btn btn-danger" type="submit">Confirm</button>
+    <button class="btn btn-danger" type="submit">{% trans "Confirm" context "delete confirmation" %}</button>
 {% endblock %}

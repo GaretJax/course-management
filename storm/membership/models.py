@@ -1,22 +1,45 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
+
+from cities.models import Country, City
 
 
 class Contact(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    UNKNOWN, MALE, FEMALE = None, True, False
+    GENDER_CHOICES = (
+        (MALE, _('Male')),
+        (FEMALE, _('Female')),
+    )
 
-#    birthday = models.DateField(null=True, blank=True)
-#    gender
-#    nationality
+    first_name = models.CharField(_('first name'), max_length=255)
+    last_name = models.CharField(_('last name'), max_length=255)
 
-#    address1
-#    address2
-#    zip
-#    city
-#    state
-#    country
+    # Personal data
+    birthday = models.DateField(_('birthday'), null=True, blank=True)
+    nationality = models.ForeignKey(
+        Country, models.SET_NULL,
+        verbose_name=_('nationality'),
+        null=True, blank=True,
+        related_name='+',
+    )
+    gender = models.NullBooleanField(_('gender'), choices=GENDER_CHOICES)
+
+    # Address
+    address = models.TextField(_('address'), blank=True)
+    zip_code = models.CharField(_('ZIP code'), max_length=16, blank=True)
+    city = models.ForeignKey(
+        City, models.SET_NULL,
+        verbose_name=_('city'),
+        null=True, blank=True,
+        related_name='+',
+    )
+
 #    phone
+#    mobile
 #    email
+
+    class Meta:
+        ordering = ('last_name', 'first_name')
 
     def get_full_name(self):
         return '{} {}'.format(self.first_name, self.last_name)
@@ -26,7 +49,10 @@ class Contact(models.Model):
 
 
 class MembershipType(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(
+        pgettext_lazy('membership type', 'label'),
+        max_length=255,
+    )
 
     class Meta:
         ordering = ('name',)
@@ -36,9 +62,12 @@ class MembershipType(models.Model):
 
 
 class MembershipPeriod(models.Model):
-    name = models.CharField(max_length=255)
-    start = models.DateField()
-    end = models.DateField()
+    name = models.CharField(
+        pgettext_lazy('membership period', 'label'),
+        max_length=255,
+    )
+    start = models.DateField(_('start'))
+    end = models.DateField(_('end'))
 
     class Meta:
         ordering = ('start', 'end', 'name')

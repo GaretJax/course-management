@@ -1,0 +1,19 @@
+{% extends "modal_form.html" %}
+
+{% load bootstrap3 %}
+
+{% block modal_title %}
+    {% if object %}{% trans "Edit contact" context "title" %}{% else %}{% trans "Add contact" context "title" %}{% endif %}
+{% endblock %}
+
+{% block modal_body %}
+    <div class="row">
+        {% bootstrap_field form.first_name form_group_class='form-group col-md-12' %}
+        {% bootstrap_field form.last_name form_group_class='form-group col-md-12' %}
+    </div>
+    <div class="row">
+        {% bootstrap_field form.birthday addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-8' field_class='date datepicker' %}
+        {% bootstrap_field form.gender form_group_class='form-group col-md-6' %}
+        {% bootstrap_field form.nationality form_group_class='form-group col-md-10' %}
+    </div>
+{% endblock %}

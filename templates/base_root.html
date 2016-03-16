@@ -1,4 +1,4 @@
-<!doctype html>{% load i18n staticfiles %}
+<!doctype html>{% load i18n staticfiles  %}
 <html lang="{{ LANGUAGE_CODE }}" data-locale="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
@@ -34,9 +34,11 @@
     <script src="{% static 'js/libs/class.min.js' %}"></script>
     <script src="{% static 'js/libs/outdatedBrowser.min.js' %}"></script>
     <script src="{% static 'js/addons/cl.utils.js' %}"></script>
+    <script src="{% static 'js/addons/select2.min.js' %}"></script>
+    <script src="{% static 'django_select2/django_select2.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
 
-    {#% render_block "js" %#}
+    {#% render_block "js" #}
     {% block extrafoot %}{% endblock %}
     {{ ALDRYN_SNAKE.render_tail }}
     <div class="browser-outdated" id="outdated" hidden="hidden">

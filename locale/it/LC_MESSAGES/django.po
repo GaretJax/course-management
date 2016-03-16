@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-16 17:05-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: storm/education/forms.py:19
+msgid "Use course default"
+msgstr "Usa l'impostazione predefinita del corso"
+
+#: storm/membership/apps.py:9 storm/membership/apps.py:10
+msgid "Members management"
+msgstr "Gestione soci"
+
+#: storm/membership/apps.py:12
+#: storm/membership/templates/membership/contact_list.html:7
+msgid "Contacts"
+msgstr "Contatti"
+
+#: storm/membership/apps.py:13
+#: storm/membership/templates/membership/membershipperiod_list.html:7
+msgid "Membership periods"
+msgstr "Periodi sociali"
+
+#: storm/membership/apps.py:14
+msgid "Configuration"
+msgstr "Configurazione"
+
+#: storm/membership/apps.py:15
+#: storm/membership/templates/membership/membershiptype_list.html:7
+msgid "Membership structure"
+msgstr "Struttura sociale"
+
+#: storm/membership/forms.py:12
+msgid "Nationality"
+msgstr "Nazionalità"
+
+#: storm/membership/forms.py:16
+msgid "City"
+msgstr "Città"
+
+#: storm/membership/forms.py:20
+msgid "Country"
+msgstr "Nazione"
+
+#: storm/membership/forms.py:39
+msgid "Gender"
+msgstr "Sesso"
+
+#: storm/membership/models.py:10
+msgid "Male"
+msgstr "Maschio"
+
+#: storm/membership/models.py:11
+msgid "Female"
+msgstr "Femmina"
+
+#: storm/membership/models.py:14
+msgid "first name"
+msgstr "Nome"
+
+#: storm/membership/models.py:15
+msgid "last name"
+msgstr "Cognome"
+
+#: storm/membership/models.py:18
+msgid "birthday"
+msgstr "data di nascita"
+
+#: storm/membership/models.py:21
+msgid "nationality"
+msgstr "nazionalità"
+
+#: storm/membership/models.py:25
+msgid "gender"
+msgstr "sesso"
+
+#: storm/membership/models.py:28
+msgid "address"
+msgstr "indirizzo"
+
+#: storm/membership/models.py:29
+msgid "ZIP code"
+msgstr "CAP"
+
+#: storm/membership/models.py:32
+msgid "city"
+msgstr "città"
+
+#: storm/membership/models.py:53
+msgctxt "membership type"
+msgid "label"
+msgstr "etichetta"
+
+#: storm/membership/models.py:66
+msgctxt "membership period"
+msgid "label"
+msgstr "etichetta"
+
+#: storm/membership/models.py:69
+msgid "start"
+msgstr "inizio"
+
+#: storm/membership/models.py:70
+msgid "end"
+msgstr "fine"
+
+#: storm/membership/templates/membership/contact_form.html:7
+#: storm/membership/templates/membership/contact_form_ajax.html:6
+msgctxt "title"
+msgid "Edit contact"
+msgstr "Modifica contatto"
+
+#: storm/membership/templates/membership/contact_form.html:7
+#: storm/membership/templates/membership/contact_form_ajax.html:6
+msgctxt "title"
+msgid "Add contact"
+msgstr "Aggiungi contatto"
+
+#: storm/membership/templates/membership/contact_form.html:32
+#: templates/modal_form.html:19
+msgid "Save"
+msgstr "Salva"
+
+#: storm/membership/templates/membership/contact_form.html:32
+#: templates/modal_form.html:19
+msgid "Create"
+msgstr "Crea"
+
+#: storm/membership/templates/membership/contact_list.html:9
+msgctxt "link"
+msgid "Add contact"
+msgstr "Aggiungi un contatto"
+
+#: storm/membership/templates/membership/contact_list.html:17
+msgid "Full name"
+msgstr "Nome"
+
+#: storm/membership/templates/membership/contact_list.html:27
+#: storm/membership/templates/membership/membershipperiod_list.html:30
+#: storm/membership/templates/membership/membershiptype_list.html:27
+msgid "Edit"
+msgstr "Modifica"
+
+#: storm/membership/templates/membership/contact_list.html:28
+#: storm/membership/templates/membership/membershipperiod_list.html:31
+#: storm/membership/templates/membership/membershiptype_list.html:28
+msgid "Delete"
+msgstr "Elimina"
+
+#: storm/membership/templates/membership/membershipperiod_form_ajax.html:6
+msgctxt "title"
+msgid "Edit membership period"
+msgstr "Modifica periodo sociale"
+
+#: storm/membership/templates/membership/membershipperiod_form_ajax.html:6
+msgctxt "title"
+msgid "Add membership period"
+msgstr "Aggiungi periodo sociale"
+
+#: storm/membership/templates/membership/membershipperiod_list.html:9
+msgctxt "link"
+msgid "Add period"
+msgstr "Aggiungi un periodo sociale"
+
+#: storm/membership/templates/membership/membershipperiod_list.html:17
+msgctxt "membership period"
+msgid "Label"
+msgstr "Etichetta"
+
+#: storm/membership/templates/membership/membershipperiod_list.html:18
+msgid "Period"
+msgstr "Periodo"
+
+#: storm/membership/templates/membership/membershiptype_form_ajax.html:4
+#: storm/membership/templates/membership/periodtype_form_ajax.html:4
+msgctxt "title"
+msgid "Edit membership type"
+msgstr "Modifica tipologia di socio"
+
+#: storm/membership/templates/membership/membershiptype_form_ajax.html:4
+#: storm/membership/templates/membership/periodtype_form_ajax.html:4
+msgctxt "title"
+msgid "Add membership type"
+msgstr "Aggiungi tipologia di socio"
+
+#: storm/membership/templates/membership/membershiptype_list.html:9
+msgctxt "link"
+msgid "Add membership type"
+msgstr "Aggiungi una tipologia di socio"
+
+#: storm/membership/templates/membership/membershiptype_list.html:17
+msgctxt "membership type"
+msgid "Label"
+msgstr "Etichetta"
+
+#: storm/membership/views.py:119
+msgid "Overview"
+msgstr "Panoramica"
+
+#: storm/membership/views.py:128
+msgid "Structure"
+msgstr "Struttura"
+
+#: storm/membership/views.py:137
+msgid "Members"
+msgstr "Soci"
+
+#: templates/404.html:6 templates/404.html.py:10
+msgid "404 - Page not found"
+msgstr "404 - Pagina non trovata"
+
+#: templates/404.html:11
+msgid "We're sorry, but the requested page could not be found."
+msgstr ""
+
+#: templates/500.html:5 templates/500.html.py:11
+msgid "500 - Server error"
+msgstr "500 - Errore del server"
+
+#: templates/500.html:12
+msgid ""
+"There's been an error. It's been reported to the site administrators via e-"
+"mail and should be fixed shortly. Thanks for your patience."
+msgstr ""
+
+#: templates/base.html:22
+msgid "Shortcuts"
+msgstr "Scelte rapide"
+
+#: templates/base.html:24
+msgid "Go to home"
+msgstr "Vai alla pagina principale"
+
+#: templates/base.html:25
+msgid "Jump to navigation"
+msgstr "Vai al menu di navigazione"
+
+#: templates/base.html:26
+msgid "Jump to content"
+msgstr "Vai al contenuto"
+
+#: templates/base.html:27
+msgid "Contact"
+msgstr "Contatto"
+
+#: templates/base.html:42
+msgid "Change password"
+msgstr "Modifica password"
+
+#: templates/base.html:43
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/base.html:77
+msgid "Rendered in __EXECUTION_TIME__"
+msgstr "Richiesta elaborata in __EXECUTION_TIME__"
+
+#: templates/base_root.html:45
+msgid "Please enable JavaScript"
+msgstr "Per favore abilita JavaScript"
+
+#: templates/base_root.html:46
+msgid "Your browser is out-of-date!"
+msgstr "Il tuo browser non é aggiornato!"
+
+#: templates/base_root.html:47
+msgid "Update your browser to view this website correctly."
+msgstr "Aggiorna il tuo browser per visualizzare questo sito correttamente."
+
+#: templates/base_root.html:50
+msgid "Update my browser now"
+msgstr "Aggiorna il mio browser ora"
+
+#: templates/confirm_delete_ajax.html:4
+#, python-format
+msgid "Deleting \"%(object)s\""
+msgstr "Eliminazione di \"%(object)s\""
+
+#: templates/confirm_delete_ajax.html:8
+#, python-format
+msgid "Are you sure you want to delete \"%(object)s\"?"
+msgstr "Sei sicuro di voler eliminare \"%(object)s\"?"
+
+#: templates/confirm_delete_ajax.html:12
+msgctxt "delete confirmation"
+msgid "Confirm"
+msgstr "Conferma"
+
+#: templates/includes/menu/pagenav.html:4
+msgid "previous"
+msgstr "precedente"
+
+#: templates/includes/menu/pagenav.html:26
+msgid "next"
+msgstr "successiva"
+
+#: templates/sidebar_left.html:13 templates/sidebar_right.html.py:13
+msgid "Sidebar"
+msgstr "Barra laterale"

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% load chrome %}
+
 {% block content %}
     <header class="default-header">
         <h2>{% trans "Contacts" %}</h2>
         <div class="actions">
-            <a class="btn btn-default" href="{% url "membership:contacts:add" %}">{% trans "Add contact" %}</a>
+            <a class="btn btn-default" href="{% url "membership:contacts:add" %}" rel="modal">{% trans "Add contact" context "link" %}</a>
         </div>
     </header>
 
@@ -12,19 +14,19 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{% trans "First name" %}</th>
-                    <th>{% trans "Last name" %}</th>
+                    <th>{% trans "Full name" %}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for contact in object_list %}
                     <tr>
-                        <td>{{ contact.first_name }}</td>
-                        <td>{{ contact.last_name }}</td>
-                        <td>
-                            <a class="btn btn-default btn-xs" href="{% url "membership:contacts:edit" pk=contact.pk %}">{% trans "Edit" %}</a>
-                            <a class="btn btn-danger btn-xs" href="{% url "membership:contacts:delete" pk=contact.pk %}">{% trans "Delete" %}</a>
+                        <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+                        <td class="btn-cell text-right">
+                            <div class="btn-group">
+                                {% cell_button _("Edit") icon="pencil" modal=True url "membership:contacts:edit" pk=contact.pk %}
+                                {% cell_button _("Delete") icon="trash" modal=True url "membership:contacts:delete" pk=contact.pk %}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

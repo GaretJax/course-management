@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block modal_title %}
-    {% if object %}Edit membership period{% else %}Add membership period{% endif %}
+    {% if object %}{% trans "Edit membership period" context "title" %}{% else %}{% trans "Add membership period" context "title" %}{% endif %}
 {% endblock %}
 
 {% block modal_body %}
@@ -12,8 +12,4 @@
         {% bootstrap_field form.start addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datepicker' %}
         {% bootstrap_field form.end addon_before='<span class="fa fa-calendar"></span>' form_group_class='form-group col-md-12' field_class='date datepicker' %}
     </div>
-{% endblock %}
-
-{% block modal_footer %}
-    <button class="btn btn-primary" type="submit">{% if object %}Save{% else %}Create{% endif %}</button>
 {% endblock %}

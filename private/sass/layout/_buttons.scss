@@ -10,6 +10,28 @@
     @include transition(background, $speed-base);
 }
 
+.table > tbody > tr > td.btn-cell {
+    padding: 0;
+
+    &.text-left:first-child > .btn-group > .btn {
+        border-left: 0;
+    }
+    &.text-right:last-child > .btn-group > .btn {
+        border-right: 0;
+    }
+
+    > .btn-group {
+        height: 100%;
+    }
+
+    > .btn-group > .btn {
+        height: 100%;
+        border-radius: 0;
+        border-top: 0;
+        border-bottom: 0;
+    }
+}
+
 // BUTTONS/outline
 .btn-outline {
     border: 1px solid transparent;

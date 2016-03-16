@@ -35,7 +35,9 @@ INSTALLED_APPS.extend([
 
     'bootstrap3',
     'django_gravatar',
+    'django_select2',
     'cities',
+#    'sekizai',
 
     'storm.menu',
     'storm.membership.apps.ContactConfig',
@@ -72,3 +74,6 @@ CITIES_FILES = {
        'filenames': ['CH.zip', 'IT.zip', 'DE.zip', 'FR.zip'],
     },
 }
+
+SELECT2_JS = 'js/addons/jquery.select2.min.js'
+SELECT2_CSS = None

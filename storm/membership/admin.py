@@ -4,7 +4,10 @@ from . import models
 
 
 class ContactAdmin(admin.ModelAdmin):
-    pass
+    raw_id_fields = (
+        'nationality',
+        'city',
+    )
 admin.site.register(models.Contact, ContactAdmin)
 
 

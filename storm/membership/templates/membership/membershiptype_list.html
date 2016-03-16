@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% load chrome %}
+
 {% block content %}
     <header class="default-header">
-        <h2>Membership structure</h2>
+        <h2>{% trans "Membership structure" %}</h2>
         <div class="actions">
-            <a class="btn btn-default" href="{% url "membership:types:add" %}" rel="modal">Add membership type</a>
+            <a class="btn btn-default" href="{% url "membership:types:add" %}" rel="modal">{% trans "Add membership type" context "link" %}</a>
         </div>
     </header>
 
@@ -12,7 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Label</th>
+                    <th>{% trans "Label" context "membership type" %}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -20,9 +22,11 @@
                 {% for type in object_list %}
                     <tr>
                         <td>{{ type.name }}</td>
-                        <td>
-                            <a class="btn btn-default btn-xs" href="{% url "membership:types:edit" pk=type.pk %}" rel="modal">Edit</a>
-                            <a class="btn btn-danger btn-xs" href="{% url "membership:types:delete" pk=type.pk %}" rel="modal">Delete</a>
+                        <td class="btn-cell text-right">
+                            <div class="btn-group">
+                                {% cell_button _("Edit") icon="pencil" modal=True url "membership:types:edit" pk=type.pk %}
+                                {% cell_button _("Delete") icon="trash" modal=True url "membership:types:delete" pk=type.pk %}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

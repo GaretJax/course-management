@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
+{% load chrome %}
+
 {% block content %}
     <header class="default-header">
-        <h2>Membership periods</h2>
+        <h2>{% trans "Membership periods" %}</h2>
         <div class="actions">
-            <a class="btn btn-default" href="{% url "membership:periods:add" %}" rel="modal">Add period</a>
+            <a class="btn btn-default" href="{% url "membership:periods:add" %}" rel="modal">{% trans "Add period" context "link" %}</a>
         </div>
     </header>
 
@@ -12,8 +14,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Label</th>
-                    <th>Period</th>
+                    <th>{% trans "Label" context "membership period" %}</th>
+                    <th>{% trans "Period" %}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -23,9 +25,11 @@
                         <td>
                             <a href="{% url "membership:periods:overview" period_pk=period.pk %}">{{ period.name }}</a></td>
                         <td>{{ period.start }} – {{ period.end }}</td>
-                        <td>
-                            <a class="btn btn-default btn-xs" href="{% url "membership:periods:edit" period_pk=period.pk %}" rel="modal">Edit</a>
-                            <a class="btn btn-danger btn-xs" href="{% url "membership:periods:delete" period_pk=period.pk %}" rel="modal">Delete</a>
+                        <td class="btn-cell text-right">
+                            <div class="btn-group">
+                                {% cell_button _("Edit") icon="pencil" modal=True url "membership:periods:edit" period_pk=period.pk %}
+                                {% cell_button _("Delete") icon="trash" modal=True url "membership:periods:delete" period_pk=period.pk %}
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

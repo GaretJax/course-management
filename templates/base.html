@@ -39,8 +39,8 @@
                                 {{ user.get_full_name|default:user.username }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{% url "password_change" %}">Change password</a></li>
-                                <li><a href="{% url "logout" %}">Logout</a></li>
+                                <li><a href="{% url "password_change" %}">{% trans "Change password" %}</a></li>
+                                <li><a href="{% url "logout" %}">{% trans "Logout" %}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@
                 {#<li><a href="{{ url_for('docs_index') }}">Documentation</a></li>#}
                 {#<li><a href="{{ url_for('feedback', next=request.url) }}" class="overlay-form">Feedback</a></li>#}
             </ul>
-            <p>Rendered in __EXECUTION_TIME__</p>
+            <p>{% trans "Rendered in __EXECUTION_TIME__" %}</p>
             <p>Copyright &copy; {% now "Y" %} Jonathan Stoppani.</p>
         </footer>
     </div>

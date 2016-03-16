@@ -1,0 +1,4 @@
+<a class="btn btn-default btn-s" href="{{ url }}"{% if modal %} rel="modal"{% endif %}>
+    {% if icon %}<span class="fa fa-{{ icon }}" aria-hidden="true"></span>{% endif %}
+    {% if show_text %}{{ text }}{% else %}<span class="sr-only">{{ text }}</span>{% endif %}
+</a>

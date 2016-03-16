@@ -1,9 +1,5 @@
 {% extends "modal_form.html" %}
 
 {% block modal_title %}
-    {% if object %}Edit membership type{% else %}Add membership type{% endif %}
-{% endblock %}
-
-{% block modal_footer %}
-    <button class="btn btn-primary" type="submit">{% if object %}Save{% else %}Create{% endif %}</button>
+    {% if object %}{% trans "Edit membership type" context "title" %}{% else %}{% trans "Add membership type" context "title" %}{% endif %}
 {% endblock %}
